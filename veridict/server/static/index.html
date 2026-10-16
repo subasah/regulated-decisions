@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VERIDICT | Regulated Decision Intelligence Engine</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-badge">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-name">VERIDICT</span>
+      </div>
+      <div class="brand-tagline">Policy-Grounded & Adversarial Decision Intelligence for Regulated Healthcare</div>
+    </div>
+    <div class="header-right">
+      <span class="compliance-badge">CMS-0057-F & ERISA § 503 COMPLIANT</span>
+      <span class="status-pill"><span class="pulse-dot"></span> ENGINE READY</span>
+      <a href="https://github.com/subasah/regulated-decisions" target="_blank" class="github-btn" title="View Source">GitHub Repo</a>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="nav-bar">
+    <button class="nav-tab active" data-tab="studio">
+      <span class="tab-icon">🧪</span> Triad Studio & Live Demo
+    </button>
+    <button class="nav-tab" data-tab="high-level">
+      <span class="tab-icon">🏛️</span> High-Level Understanding
+    </button>
+    <button class="nav-tab" data-tab="low-level">
+      <span class="tab-icon">⚙️</span> Low-Level Architecture
+    </button>
+    <button class="nav-tab" data-tab="policies">
+      <span class="tab-icon">📜</span> Computable Policies
+    </button>
+    <button class="nav-tab" data-tab="benchmark">
+      <span class="tab-icon">📊</span> Suite Benchmark & Tamper Lab
+    </button>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+
+    <!-- ==================== TAB 1: TRIAD STUDIO & LIVE DEMO ==================== -->
+    <section id="tab-studio" class="tab-pane active">
+      <!-- Case Selection Bar -->
+      <div class="control-panel card">
+        <div class="control-group">
+          <label for="case-selector" class="control-label">Select Clinical Case Vignette:</label>
+          <select id="case-selector" class="select-input">
+            <option value="">-- Choose a benchmark case --</option>
+          </select>
+        </div>
+        <div class="quick-chips" id="quick-case-chips">
+          <!-- Populated by JS -->
+        </div>
+        <div class="control-actions">
+          <button id="btn-run-case" class="btn btn-primary">
+            <span class="btn-icon">▶</span> Run Review Triad
+          </button>
+          <div id="execution-badge" class="exec-badge hidden">
+            <span class="exec-time">0.0 ms</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dossier & Live Debating Studio -->
+      <div class="studio-grid">
+        <!-- Left: Case Dossier & EHR Note with Highlights -->
+        <div class="dossier-col card">
+          <div class="card-header">
+            <h3>📋 Patient Case Dossier</h3>
+            <span id="dossier-domain-badge" class="badge">DOMAIN</span>
+          </div>
+          <div class="patient-summary" id="patient-summary-box">
+            <div class="patient-name-row">
+              <span class="p-name" id="p-name">Loading...</span>
+              <span class="p-meta" id="p-meta">Age -- | Plan: --</span>
+            </div>
+            <div class="p-req-row">
+              <strong>Requested:</strong> <span id="p-service">--</span>
+            </div>
+            <div class="p-codes-row">
+              <strong>Codes:</strong> <span id="p-codes" class="mono-tag">--</span>
+            </div>
+            <div class="p-provider-row">
+              <strong>Provider:</strong> <span id="p-provider">--</span>
+            </div>
+          </div>
+
+          <div class="ehr-viewer-header">
+            <h4>Raw EHR Clinical Note (Grounding Source)</h4>
+            <span class="note-hint">Citations highlighted below</span>
+          </div>
+          <div class="ehr-note-content" id="ehr-note-display">
+            Select a case and run the triad to view the clinical record.
+          </div>
+        </div>
+
+        <!-- Right: Triad Review Column (Proposer & Critic) -->
+        <div class="triad-col">
+          <!-- Proposer Card -->
+          <div class="agent-card card proposer-border">
+            <div class="agent-header">
+              <div class="agent-title">
+                <span class="agent-avatar proposer-avatar">P</span>
+                <div>
+                  <div class="agent-role">Proposer Agent</div>
+                  <div class="agent-sub">Clinical Specialist (Synthesis & Criteria Mapping)</div>
+                </div>
+              </div>
+              <div class="agent-verdict" id="proposer-verdict-badge">
+                <span class="verdict-pill pill-neutral">PENDING</span>
+              </div>
+            </div>
+            <div class="agent-narrative" id="proposer-narrative">
+              Awaiting case execution...
+            </div>
+            <div class="criteria-list-container">
+              <h5>Criteria Evaluation Checklist</h5>
+              <div class="criteria-list" id="proposer-criteria-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Critic Card -->
+          <div class="agent-card card critic-border">
+            <div class="agent-header">
+              <div class="agent-title">
+                <span class="agent-avatar critic-avatar">C</span>
+                <div>
+                  <div class="agent-role">Critic Agent</div>
+                  <div class="agent-sub">Adversarial Compliance Auditor (Grounding & Safety)</div>
+                </div>
+              </div>
+              <div class="agent-verdict" id="critic-verdict-badge">
+                <span class="severity-pill pill-neutral">PENDING</span>
+              </div>
+            </div>
+            <div class="agent-narrative" id="critic-narrative">
+              Awaiting case execution...
+            </div>
+            <div class="challenges-container">
+              <h5>Adversarial Challenges & Safety Audits</h5>
+              <div class="challenges-list" id="critic-challenges-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Judge Adjudication & Rationales (Wide Card) -->
+      <div class="judge-section card judge-border" id="judge-card">
+        <div class="judge-header">
+          <div class="judge-title-area">
+            <span class="agent-avatar judge-avatar">J</span>
+            <div>
+              <div class="agent-role">Judge Agent (Chief Medical Officer / Autonomous Adjudicator)</div>
+              <div class="agent-sub">Consensus Resolution, Safety Overrides & Defensible Dual Rationales</div>
+            </div>
+          </div>
+          <div class="judge-verdict-meta">
+            <span id="judge-status-badge" class="badge">CONSENSUS</span>
+            <div class="confidence-box">
+              <span>Confidence:</span> <strong id="judge-confidence">--</strong>
+            </div>
+            <div class="divergence-box">
+              <span>Divergence:</span> <strong id="judge-divergence">--</strong>
+            </div>
+            <div id="judge-final-badge" class="final-badge badge-neutral">PENDING</div>
+          </div>
+        </div>
+
+        <div id="hitl-alert-box" class="hitl-banner hidden">
+          <span class="hitl-icon">⚠️</span>
+          <div class="hitl-content">
+            <strong>Human-in-the-Loop Required:</strong>
+            <span id="hitl-reason-text">--</span>
+          </div>
+        </div>
+
+        <!-- Dual Rationales Split View -->
+        <div class="rationales-grid">
+          <div class="rationale-box clinician-box">
+            <div class="rationale-header">
+              <h4>🩺 Clinician & Auditor Technical Rationale</h4>
+              <span class="subtext">Dense, ICD/CPT-grounded, statutory clauses</span>
+            </div>
+            <pre class="rationale-text" id="clinician-rationale-text">Run a case to generate technical clinician rationale...</pre>
+          </div>
+
+          <div class="rationale-box patient-box">
+            <div class="rationale-header">
+              <h4>👤 CMS-0057-F Patient Plain-Language Notice</h4>
+              <span class="subtext">6th-grade reading level, clear non-met reasons, next steps</span>
+            </div>
+            <div class="patient-notice-text" id="patient-notice-text">
+              Run a case to generate patient plain-language notice...
+            </div>
+          </div>
+        </div>
+
+        <!-- Statutory Appeal Rights Box -->
+        <div class="appeal-box" id="appeal-box">
+          <div class="appeal-header">
+            <strong>Statutory Appeal & External Review Rights (ERISA 29 CFR 2560.503-1 / CMS-0057-F):</strong>
+          </div>
+          <div class="appeal-content" id="appeal-content-text">
+            Standard appeal: 30 days | Expedited urgent appeal: 72 hours
+          </div>
+        </div>
+      </div>
+
+      <!-- Cryptographic Audit Ledger Section -->
+      <div class="audit-section card">
+        <div class="audit-header-row">
+          <div>
+            <h3>🔐 Immutable Cryptographic Decision Ledger (SHA-256 / Merkle DAG)</h3>
+            <p class="section-desc">Guarantees zero-tamper lineage across raw input, evidence extraction, proposer, critic, and judge.</p>
+          </div>
+          <div class="audit-actions">
+            <button id="btn-tamper-sim" class="btn btn-warning">
+              <span class="btn-icon">⚡</span> Simulate Malicious Tampering
+            </button>
+            <button id="btn-verify-audit" class="btn btn-secondary">
+              <span class="btn-icon">✓</span> Re-Verify Integrity
+            </button>
+          </div>
+        </div>
+
+        <div class="merkle-root-display">
+          <div class="merkle-pill">
+            <span class="lbl">Merkle Root:</span>
+            <code id="merkle-root-val">--</code>
+          </div>
+          <div class="merkle-status" id="audit-status-pill">
+            <span class="pill-green">CHAIN INTACT</span>
+          </div>
+        </div>
+
+        <!-- Visual Hash Chain Nodes -->
+        <div class="chain-flow" id="chain-flow-container">
+          <!-- Injected via JS -->
+        </div>
+
+        <div id="tamper-alert-box" class="tamper-alert hidden">
+          <!-- Populated if tamper triggered -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: HIGH-LEVEL UNDERSTANDING ==================== -->
+    <section id="tab-high-level" class="tab-pane">
+      <div class="content-doc card">
+        <div class="doc-header">
+          <h2>High-Level Understanding: Regulated Decision Intelligence</h2>
+          <p class="lead">Why Black-Box Generative AI Fails in Regulated Healthcare & How the Veridict Triad Solves It.</p>
+        </div>
+
+        <div class="doc-grid">
+          <div class="doc-card">
+            <div class="doc-icon">⚖️</div>
+            <h3>The Regulatory Crisis</h3>
+            <p>
+              In healthcare utilization management, prior authorization, and claims adjudication, decisions affect human health and millions of dollars in coverage.
+              Federal and state authorities enforce strict statutory frameworks:
+            </p>
+            <ul>
+              <li><strong>CMS-0057-F Interoperability & Prior Auth Rule:</strong> Mandates specific, auditable denial reasons and strict 72-hour expedited turnarounds.</li>
+              <li><strong>ERISA § 503 (29 CFR 2560.503-1):</strong> Requires full and fair review, identification of specific plan rules/protocols, and mandatory human physician appeal rights.</li>
+              <li><strong>Congressional Inquiries:</strong> Scrutiny over black-box denial algorithms (e.g. nH Predict lawsuits) where automated tools denied care without verifiable clinical grounding.</li>
+            </ul>
+          </div>
+
+          <div class="doc-card">
+            <div class="doc-icon">🛡️</div>
+            <h3>The Veridict Triad Pattern</h3>
+            <p>
+              Rather than querying a single monolithic LLM prompt, Veridict decouples reasoning into an adversarial triad with deterministic mathematical guardrails:
+            </p>
+            <ul>
+              <li><strong>Proposer (Clinical Specialist):</strong> Performs evidence mapping, evaluates criteria thresholds, and proposes an evidence-grounded action.</li>
+              <li><strong>Critic (Adversarial Auditor):</strong> Actively looks for reasons <em>why the proposal is wrong or unsafe</em> (hallucinated citations, missing contraindications, step therapy shortfalls).</li>
+              <li><strong>Judge (Chief Medical Officer):</strong> Adjudicates consensus, computes divergence, enforces deterministic safety overrides, and determines human routing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Architecture Flow Diagram -->
+        <div class="architecture-diagram-container">
+          <h3>The Decision Pipeline Workflow</h3>
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <div class="step-num">1</div>
+              <div class="step-title">EHR Ingestion & Parsing</div>
+              <div class="step-desc">Progress notes, lab values, vitals, ICD-10/CPT codes, and patient demographics.</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+              <div class="step-num">2</div>
+              <div class="step-title">Computable Policy Match</div>
+              <div class="step-desc">Machine-readable clinical policy loaded with inclusion, exclusion, and step-therapy rules.</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+              <div class="step-num">3</div>
+              <div class="step-title">Proposer Synthesis</div>
+              <div class="step-desc">Criteria evaluated; verbatim citations anchored to exact character spans in EHR.</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+              <div class="step-num">4</div>
+              <div class="step-title">Critic Adversarial Audit</div>
+              <div class="step-desc">Zero-tolerance grounding check, contraindication scan, lookback & duration audit.</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step highlight-step">
+              <div class="step-num">5</div>
+              <div class="step-title">Judge Adjudication</div>
+              <div class="step-desc">Safety override enforcement, consensus divergence calculation, and dual rationales.</div>
+            </div>
+            <div class="flow-arrow">➔</div>
+            <div class="flow-step">
+              <div class="step-num">6</div>
+              <div class="step-title">Cryptographic Ledger</div>
+              <div class="step-desc">SHA-256 hash chaining & Merkle root sealing for tamper-evident auditing.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Regulated Verticals -->
+        <div class="verticals-section">
+          <h3>The 4 Core Regulated Healthcare Verticals</h3>
+          <div class="verticals-grid">
+            <div class="vertical-card">
+              <span class="v-badge">PRIOR AUTH</span>
+              <h4>Prior Authorization (PA)</h4>
+              <p>Adjudicating specialty medications (e.g. GLP-1 agonists, biologics). Verifies BMI cutoffs, lifestyle trials, step-therapy failures, and screens for black-box boxed warnings.</p>
+            </div>
+            <div class="vertical-card">
+              <span class="v-badge">UTILIZATION MGMT</span>
+              <h4>Utilization Review (UM)</h4>
+              <p>Adjudicating Part A Acute Inpatient vs. Part B Observation Stays under CMS Two-Midnight Rule (CMS-1599-F) and MCG/InterQual criteria for chest pain & ACS.</p>
+            </div>
+            <div class="vertical-card">
+              <span class="v-badge">CLAIMS INTEGRITY</span>
+              <h4>Claims Integrity & FWA</h4>
+              <p>Pre-payment and post-payment audit of unbundled billing, specifically Modifier 25 with minor surgical procedures under CMS Claims Manual Ch. 12 § 30.6.6.</p>
+            </div>
+            <div class="vertical-card">
+              <span class="v-badge">CARE MANAGEMENT</span>
+              <h4>Care Management Stratification</h4>
+              <p>Post-discharge transition-of-care enrollment for high-risk Heart Failure patients based on LACE readmission index, ejection fraction, and SDOH vulnerabilities.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recruiter Interview Guide -->
+        <div class="recruiter-box">
+          <div class="recruiter-header">
+            <span class="r-icon">🎯</span>
+            <div>
+              <h4>Recruiter & Technical Interview Talking Points</h4>
+              <p>How to frame this project in an engineering, product, or leadership interview.</p>
+            </div>
+          </div>
+          <div class="recruiter-content">
+            <div class="r-point">
+              <strong>1. The Core Engineering Challenge:</strong>
+              "In regulated health-tech, you cannot deploy standard probabilistic LLMs as black-box deciders. A hallucinated lab value or missed contraindication is catastrophic. Veridict demonstrates how to combine computable deterministic rules with adversarial multi-agent debate to achieve mathematical grounding and explainability."
+            </div>
+            <div class="r-point">
+              <strong>2. Latency vs. Thoroughness Tradeoff:</strong>
+              "By separating computable criteria matching from semantic text verification, the core engine executes in under 5ms in deterministic benchmark mode, while maintaining full DAG hash chaining and dual-audience generation."
+            </div>
+            <div class="r-point">
+              <strong>3. Autonomous vs. Human-in-the-Loop Boundaries:</strong>
+              "We strictly adhere to CMS-0057-F and ERISA § 503: approvals meeting 100% criteria with zero critic challenges can execute autonomously; all adverse determinations, safety overrides, or high-divergence cases are routed to licensed Medical Directors."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: LOW-LEVEL ARCHITECTURE ==================== -->
+    <section id="tab-low-level" class="tab-pane">
+      <div class="content-doc card">
+        <div class="doc-header">
+          <h2>Low-Level Architecture & Technical Specifications</h2>
+          <p class="lead">Data Contracts, Computable AST Evaluation, Character Offset Grounding, and Cryptographic Merkle Lineage.</p>
+        </div>
+
+        <!-- Technical Deep Dives -->
+        <div class="tech-spec-grid">
+          <div class="tech-spec-box">
+            <h4>1. Computable Policy Schema (AST Model)</h4>
+            <p>Policies are defined as strongly typed Pydantic models containing formal criteria predicates:</p>
+            <pre class="code-block"><code>class ClinicalCriterion(BaseModel):
+    criterion_id: str             # e.g. CRIT-GLP1-BMI-HIGH
+    criterion_type: CriterionType # INCLUSION | EXCLUSION | STEP_THERAPY
+    field_name: str               # e.g. "bmi"
+    rule_operator: str            # ">=", "<=", "==", "in"
+    threshold: Any                # 30.0
+    unit: Optional[str]           # "kg/m2"
+    lookback_days: Optional[int]  # 90 days max age
+    is_mandatory: bool            # True</code></pre>
+            <p>Logical groups evaluate with <code>ALL_OF</code>, <code>ANY_OF</code>, or <code>AT_LEAST_N</code> semantics, separating clinical logic from arbitrary text prompts.</p>
+          </div>
+
+          <div class="tech-spec-box">
+            <h4>2. Zero-Tolerance Citation Grounding</h4>
+            <p>Every criterion claim must be anchored to verbatim source spans:</p>
+            <pre class="code-block"><code>def verify_citation(citation: Citation, raw_text: str):
+    # 1. Exact string search
+    idx = raw_text.find(citation.verbatim_quote)
+    if idx != -1:
+        citation.start_char = idx
+        citation.end_char = idx + len(citation.verbatim_quote)
+        citation.is_verified = True
+    # 2. Rejection on hallucination
+    else:
+        citation.is_verified = False
+        citation.verification_error = "Quote not found verbatim"</code></pre>
+            <p>If any citation is unverified, the Critic triggers a <code>BLOCKER</code>, guaranteeing zero-hallucination defense.</p>
+          </div>
+
+          <div class="tech-spec-box">
+            <h4>3. Cryptographic Hash Chain & Merkle DAG</h4>
+            <p>Every decision generates a 5-stage sequential SHA-256 hash chain:</p>
+            <pre class="code-block"><code>H(Node_i) = SHA256( CanonicalJSON(Payload_i) + ":" + H(Node_{i-1}) )
+MerkleRoot = PairwiseHashTree( [H(Node_1), ..., H(Node_5)] )</code></pre>
+            <p>Any bit change in patient data, proposer output, or critic findings immediately breaks the parent hash and invalidates the Merkle root.</p>
+          </div>
+
+          <div class="tech-spec-box">
+            <h4>4. Deterministic Safety Override Protocol</h4>
+            <p>The Judge employs a hard statutory override rule:</p>
+            <pre class="code-block"><code>if critic.severity_max == ChallengeSeverity.BLOCKER:
+    # Autonomous safety override overturns approval
+    final_det = Determination.DENY
+    status = ConsensusStatus.SAFETY_OVERRIDE_ENFORCED
+    hitl_required = True
+    hitl_reason = "Mandatory Medical Director signature for safety override"</code></pre>
+            <p>This guarantees that a rogue proposer cannot push through a contraindicated medication.</p>
+          </div>
+        </div>
+
+        <!-- Regulatory Crosswalk Table -->
+        <div class="compliance-table-container">
+          <h3>Statutory & Regulatory Standards Crosswalk</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Standard / Regulation</th>
+                <th>Legal Mandate</th>
+                <th>Veridict Implementation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CMS-0057-F (2026/2027)</strong></td>
+                <td>Mandates specific, criteria-based denial rationales and standardized interoperable data formats.</td>
+                <td>Computable policy mapping + dual-audience plain-language explanations with exact clinical criteria.</td>
+              </tr>
+              <tr>
+                <td><strong>ERISA § 503 (29 CFR 2560.503-1)</strong></td>
+                <td>Full and fair review; disclosure of internal rules/guidelines; mandatory appeal rights.</td>
+                <td>Transparent policy ID citation, statutory appeal timelines (30/180 days), and external review notice.</td>
+              </tr>
+              <tr>
+                <td><strong>CMS Two-Midnight Rule (42 CFR § 412.3)</strong></td>
+                <td>Inpatient admission criteria requiring physician expectation of care crossing 2 midnights.</td>
+                <td>Formal utilization review logic reclassifying uncomplicated short stays to Part B Observation.</td>
+              </tr>
+              <tr>
+                <td><strong>CMS Claims Manual Pub 100-04 Ch 12</strong></td>
+                <td>Modifier 25 requires significant, separately identifiable medical decision making.</td>
+                <td>Adversarial claims integrity check flagging unbundled documentation that duplicates procedure consent.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: COMPUTABLE POLICIES ==================== -->
+    <section id="tab-policies" class="tab-pane">
+      <div class="content-doc card">
+        <div class="doc-header">
+          <h2>Computable Clinical Policy Registry</h2>
+          <p class="lead">Machine-readable clinical policies governing prior authorization, utilization management, claims integrity, and care management.</p>
+        </div>
+        <div class="policy-registry-grid" id="policy-registry-cards">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: BENCHMARK & TAMPER LAB ==================== -->
+    <section id="tab-benchmark" class="tab-pane">
+      <div class="content-doc card">
+        <div class="doc-header-row">
+          <div>
+            <h2>Benchmark Test Suite & Tamper Lab</h2>
+            <p class="lead">Run automated end-to-end regression benchmarks across all clinical cases and test cryptographic integrity.</p>
+          </div>
+          <button id="btn-run-all-benchmarks" class="btn btn-primary">
+            <span class="btn-icon">⚡</span> Run Full Suite Benchmark
+          </button>
+        </div>
+
+        <div class="benchmark-summary-cards" id="benchmark-summary-row">
+          <div class="b-stat-card">
+            <span class="stat-lbl">Total Cases</span>
+            <span class="stat-val" id="bm-total-cases">6</span>
+          </div>
+          <div class="b-stat-card">
+            <span class="stat-lbl">Audit Trails Valid</span>
+            <span class="stat-val stat-green" id="bm-valid-trails">100%</span>
+          </div>
+          <div class="b-stat-card">
+            <span class="stat-lbl">Average Latency</span>
+            <span class="stat-val stat-cyan" id="bm-avg-latency">-- ms</span>
+          </div>
+          <div class="b-stat-card">
+            <span class="stat-lbl">Safety Overrides Tested</span>
+            <span class="stat-val stat-amber" id="bm-overrides">2</span>
+          </div>
+        </div>
+
+        <div class="benchmark-table-container">
+          <table class="data-table" id="benchmark-results-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Domain</th>
+                <th>Proposer</th>
+                <th>Critic Severity</th>
+                <th>Final Verdict</th>
+                <th>Consensus</th>
+                <th>Confidence</th>
+                <th>HITL</th>
+                <th>Audit Valid</th>
+                <th>Latency</th>
+              </tr>
+            </thead>
+            <tbody id="benchmark-table-body">
+              <tr>
+                <td colspan="10" class="text-center text-muted">Click "Run Full Suite Benchmark" to execute all cases.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-left">
+      <span>VERIDICT Core Architecture • Apache 2.0 • Built for High-Stakes Healthcare AI</span>
+    </div>
+    <div class="footer-right">
+      <span>Powered by Fast Pydantic & SHA-256 Merkle Lineage</span>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

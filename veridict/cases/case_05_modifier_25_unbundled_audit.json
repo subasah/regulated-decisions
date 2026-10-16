@@ -1,0 +1,50 @@
+{
+  "case_id": "CASE-MOD25-005",
+  "title": "Claims Integrity Audit: Modifier 25 Unbundling Review (CPT 99214-25 with Arthrocentesis 20610)",
+  "domain": "CLAIMS_INTEGRITY",
+  "policy_id": "POL-CLAIMS-MOD25-2026",
+  "demographics": {
+    "patient_id": "PT-77123",
+    "name": "Gerald Foster",
+    "age": 67,
+    "gender": "M",
+    "member_id": "MEM-99234-G",
+    "coverage_plan": "Medicare Advantage Preferred"
+  },
+  "requested_service": "CPT 99214-25 (E/M Office Visit Moderate MDM with Modifier 25) + CPT 20610 (Arthrocentesis Major Joint)",
+  "service_codes": ["99214-25", "20610", "M25.561"],
+  "requesting_provider": "Dr. Gregory Vance, MD (Orthopedic Surgery)",
+  "unstructured_note": "ORTHOPEDIC CLINIC PROCEDURE NOTE\nDate of Service: October 12, 2026\nPatient: Gerald Foster (DOB: 03/19/1959, Age: 67, Male)\nAttending Surgeon: Dr. Gregory Vance, MD\n\nCHIEF COMPLAINT:\nScheduled visit for planned right knee corticosteroid injection for persistent osteoarthritis pain.\n\nHISTORY & EXAMINATION:\nPatient reports ongoing right medial knee pain previously diagnosed as grade 3 primary osteoarthritis. Pain is exacerbated by prolonged standing. Denies recent falls or acute trauma. Denies fever or chills.\nFocused Exam: Right knee demonstrates mild suprapatellar fullness, medial joint line tenderness. Range of motion 0 to 125 degrees without mechanical block. Neurovascular exam intact distally.\n\nPROCEDURAL TIMEOUT & INFORMED CONSENT:\nInformed consent obtained after discussing risks including infection, bleeding, transient hyperglycemia, post-injection flare, and tendon injury. Patient elected to proceed.\n\nPROCEDURE DETAILS (CPT 20610):\nThe right knee was prepped and draped in standard sterile fashion using ChloraPrep. Under sterile technique, a 21-gauge 1.5-inch needle was inserted via anterolateral approach into the right synovial space. 2 mL of clear yellowish synovial fluid was aspirated. Subsequently, a mixture of 40 mg triamcinolone acetonide (Kenalog) and 3 mL of 1% plain lidocaine was injected without resistance. Needle withdrawn, sterile bandage applied. Patient tolerated procedure well without immediate adverse events. Discharged with post-injection activity guidance.\n\nBILLING & CODING SUBMISSION:\n- CPT 20610: Arthrocentesis, aspiration and/or injection, major joint (right knee)\n- CPT 99214-25: Office or other outpatient visit for the evaluation and management of an established patient, moderate medical decision making, with Modifier 25 indicating a significant, separately identifiable evaluation.",
+  "structured_data": {
+    "distinct_problem_documented": false,
+    "independent_mdm_level": "LOW",
+    "is_merely_procedural_work": true,
+    "billed_codes": ["99214-25", "20610"]
+  },
+  "documents": [
+    {
+      "snippet_id": "SNIP-05-CHIEF-COMPLAINT",
+      "text": "Scheduled visit for planned right knee corticosteroid injection for persistent osteoarthritis pain.",
+      "section": "CHIEF COMPLAINT",
+      "date": "2026-10-12",
+      "start_char": 210,
+      "end_char": 310
+    },
+    {
+      "snippet_id": "SNIP-05-EXAM",
+      "text": "Focused Exam: Right knee demonstrates mild suprapatellar fullness, medial joint line tenderness.",
+      "section": "HISTORY & EXAMINATION",
+      "date": "2026-10-12",
+      "start_char": 540,
+      "end_char": 637
+    },
+    {
+      "snippet_id": "SNIP-05-PROCEDURE",
+      "text": "The right knee was prepped and draped in standard sterile fashion using ChloraPrep. Under sterile technique, a 21-gauge 1.5-inch needle was inserted",
+      "section": "PROCEDURE DETAILS",
+      "date": "2026-10-12",
+      "start_char": 910,
+      "end_char": 1058
+    }
+  ]
+}

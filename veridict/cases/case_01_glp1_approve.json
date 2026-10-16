@@ -1,0 +1,53 @@
+{
+  "case_id": "CASE-GLP1-001",
+  "title": "GLP-1 Prior Authorization: Marcus Vance - Primary Obesity with Lifestyle Failure",
+  "domain": "PRIOR_AUTHORIZATION",
+  "policy_id": "POL-PA-GLP1-2026",
+  "demographics": {
+    "patient_id": "PT-88291",
+    "name": "Marcus Vance",
+    "age": 52,
+    "gender": "M",
+    "member_id": "MEM-60319-A",
+    "coverage_plan": "Commercial Comprehensive PPO"
+  },
+  "requested_service": "Wegovy (semaglutide) subcutaneous injection, 2.4 mg once weekly",
+  "service_codes": ["J3490", "E66.01", "Z68.34"],
+  "requesting_provider": "Dr. Sarah Jenkins, MD (Internal Medicine & Endocrinology)",
+  "unstructured_note": "CLINICAL PROGRESS NOTE\nEncounter Date: October 01, 2026\nPatient: Marcus Vance (DOB: 04/12/1974, Age: 52, Male)\nProvider: Dr. Sarah Jenkins, MD - Division of Endocrinology\n\nCHIEF COMPLAINT:\nFollow-up for chronic weight management and metabolic health optimization.\n\nHISTORY OF PRESENT ILLNESS:\nMr. Vance is a 52-year-old male who presents for ongoing management of class I/II obesity. He has struggled with weight for over 15 years. Over the past 7 months (commencing March 2026), he has been actively engaged in our clinic's comprehensive lifestyle and dietary modification program under registered dietitian guidance, maintaining a calorie deficit of 500 kcal/day and logging at least 150 minutes of moderate aerobic exercise weekly via wearable tracker. Despite verified adherence over this 7-month period, his weight has plateaued with less than 2.8% total body weight reduction.\n\nPHYSICAL EXAMINATION & VITALS (Today, Oct 01, 2026):\n- Blood Pressure: 132/84 mmHg\n- Heart Rate: 74 bpm\n- Height: 5 ft 10 in (177.8 cm)\n- Weight: 238 lbs (107.95 kg)\n- Calculated Body Mass Index (BMI): 34.2 kg/m2 (Obese Class I)\nGeneral: Well-nourished, alert, in no acute distress.\nNeck: Supple, thyroid is non-tender and normal in size without palpable nodules or goiter.\nCardiovascular: Regular rate and rhythm, no murmurs.\nAbdomen: Soft, non-tender, non-distended.\n\nPAST MEDICAL & SURGICAL HISTORY:\n- Obesity (E66.01)\n- Primary Essential Hypertension (I10) - controlled on Lisinopril 20mg daily\n- Hyperlipidemia (E78.2) - on Atorvastatin 20mg daily\n- No history of pancreatitis, gallbladder disease, or severe gastrointestinal motility disorders.\n\nFAMILY HISTORY:\n- Father: Coronary artery disease (MI at age 62).\n- Mother: Hypertension, Osteoarthritis.\n- Family history is negative for Medullary Thyroid Carcinoma (MTC) and Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).\n\nMEDICATIONS:\n1. Lisinopril 20 mg PO daily\n2. Atorvastatin 20 mg PO daily\n3. Multivitamin 1 tablet PO daily\n\nALLERGIES: No known drug allergies.\n\nASSESSMENT & PLAN:\n1. Severe Class I Obesity with BMI 34.2 kg/m2 and comorbid hypertension.\n2. Inadequate response to 7 months of structured lifestyle and caloric restriction intervention.\n3. Requesting Prior Authorization for Wegovy (semaglutide) starting dose escalation pathway (0.25mg titration up to 2.4mg maintenance weekly). The patient meets all clinical criteria without contraindications (no personal or family history of MTC or MEN2). Re-evaluation scheduled in 16 weeks to verify minimum 5% weight loss milestone.",
+  "structured_data": {
+    "bmi": 34.2,
+    "has_weight_comorbidity": true,
+    "comorbidities": ["Hypertension", "Hyperlipidemia"],
+    "lifestyle_trial_months": 7,
+    "vitals_recency_days": 14,
+    "has_mtc_or_men2_history": false,
+    "is_pregnant_or_lactating": false
+  },
+  "documents": [
+    {
+      "snippet_id": "SNIP-01-BMI",
+      "text": "Calculated Body Mass Index (BMI): 34.2 kg/m2",
+      "section": "PHYSICAL EXAMINATION & VITALS",
+      "date": "2026-10-01",
+      "start_char": 930,
+      "end_char": 974
+    },
+    {
+      "snippet_id": "SNIP-01-LIFESTYLE",
+      "text": "Over the past 7 months (commencing March 2026), he has been actively engaged in our clinic's comprehensive lifestyle and dietary modification program",
+      "section": "HISTORY OF PRESENT ILLNESS",
+      "date": "2026-10-01",
+      "start_char": 420,
+      "end_char": 571
+    },
+    {
+      "snippet_id": "SNIP-01-MTC",
+      "text": "Family history is negative for Medullary Thyroid Carcinoma (MTC) and Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
+      "section": "FAMILY HISTORY",
+      "date": "2026-10-01",
+      "start_char": 1390,
+      "end_char": 1512
+    }
+  ]
+}

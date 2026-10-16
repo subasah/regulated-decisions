@@ -1,0 +1,52 @@
+{
+  "case_id": "CASE-CHESTPAIN-004",
+  "title": "Utilization Review: Robert Morales - Inpatient vs. Observation Adjudication (Two-Midnight Rule)",
+  "domain": "UTILIZATION_MANAGEMENT",
+  "policy_id": "POL-UM-CHESTPAIN-2026",
+  "demographics": {
+    "patient_id": "PT-30918",
+    "name": "Robert Morales",
+    "age": 61,
+    "gender": "M",
+    "member_id": "MEM-55210-M",
+    "coverage_plan": "Medicare Advantage Part A/B"
+  },
+  "requested_service": "Hospital Inpatient Acute Care Admission (CPT 99222 / MS-DRG 313)",
+  "service_codes": ["99222", "R07.9"],
+  "requesting_provider": "Dr. Jason Miller, MD (Emergency Medicine / Hospitalist)",
+  "unstructured_note": "EMERGENCY DEPARTMENT & HOSPITAL ADMISSION NOTE\nEncounter Date: October 05, 2026 (Time: 21:30 EDT)\nPatient: Robert Morales (DOB: 02/14/1965, Age: 61, Male)\nAttending Physician: Dr. Jason Miller, MD\n\nPRESENTATION:\nPatient presented to the emergency department with intermittent non-radiating retrosternal chest pressure starting 3 hours prior to arrival while watching television. He endorses mild shortness of breath, denied diaphoresis, syncope, or radiating jaw/arm pain.\n\nINITIAL CLINICAL ASSESSMENT & VITALS:\n- Blood Pressure: 134/78 mmHg\n- Heart Rate: 72 bpm, regular rhythm\n- Respiratory Rate: 16 breaths/min\n- Oxygen Saturation: 98% on room air\n- Physical Exam: Well appearing, alert, oriented x 4. Lungs clear to auscultation bilaterally. Heart sounds S1/S2 present, no murmurs, rubs, or gallops. No peripheral edema, no signs of hypoperfusion.\n\nDIAGNOSTIC WORKUP:\n- 12-Lead ECG (21:45): Normal sinus rhythm at 70 bpm, normal axis, no acute ST-segment elevation or depression, no T-wave inversions.\n- High-Sensitivity Cardiac Troponin I (0 hours): 4.1 ng/L (Normal reference < 14 ng/L).\n- High-Sensitivity Cardiac Troponin I (3 hours): 4.3 ng/L (Delta flat, non-elevated).\n- Repeat ECG at 3 hours: Unchanged, no acute ischemic abnormalities.\n\nHOSPITAL COURSE & LENGTH OF STAY:\nPatient was admitted under inpatient status at 01:15 on Oct 06. He remained pain-free overnight on aspirin and telemetry. A pharmacological nuclear stress test was performed at 14:00 on Oct 06, which demonstrated normal myocardial perfusion with an ejection fraction of 62% and no reversible ischemia. Serial troponin at 12 hours remained negative (4.0 ng/L). Patient was discharged home in stable condition at 19:30 on Oct 06 (Total length of stay: 22 hours across 0 midnights).\n\nUTILIZATION REVIEW QUESTION:\nDoes patient meet medical necessity criteria for Acute Inpatient Admission under CMS Two-Midnight Rule, or should status be reclassified as Outpatient Observation?",
+  "structured_data": {
+    "has_hemodynamic_instability": false,
+    "troponin_above_url": false,
+    "has_ischemic_ecg": false,
+    "two_midnight_expectation_documented": false,
+    "actual_stay_hours": 22,
+    "midnights_crossed": 0
+  },
+  "documents": [
+    {
+      "snippet_id": "SNIP-04-VITALS",
+      "text": "Blood Pressure: 134/78 mmHg",
+      "section": "INITIAL CLINICAL ASSESSMENT & VITALS",
+      "date": "2026-10-05",
+      "start_char": 430,
+      "end_char": 457
+    },
+    {
+      "snippet_id": "SNIP-04-TROPONIN",
+      "text": "High-Sensitivity Cardiac Troponin I (0 hours): 4.1 ng/L (Normal reference < 14 ng/L).",
+      "section": "DIAGNOSTIC WORKUP",
+      "date": "2026-10-05",
+      "start_char": 830,
+      "end_char": 917
+    },
+    {
+      "snippet_id": "SNIP-04-LOS",
+      "text": "Patient was discharged home in stable condition at 19:30 on Oct 06 (Total length of stay: 22 hours across 0 midnights).",
+      "section": "HOSPITAL COURSE & LENGTH OF STAY",
+      "date": "2026-10-06",
+      "start_char": 1410,
+      "end_char": 1530
+    }
+  ]
+}

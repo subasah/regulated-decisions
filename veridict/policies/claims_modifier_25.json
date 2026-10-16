@@ -1,0 +1,59 @@
+{
+  "policy_id": "POL-CLAIMS-MOD25-2026",
+  "title": "Claims Integrity & Payment Adjudication Policy: Modifier 25 with Minor Surgical Procedure",
+  "version": "2026.1",
+  "effective_date": "2026-01-01",
+  "domain": "CLAIMS_INTEGRITY",
+  "regulatory_framework": "CMS Claims Processing Manual Pub. 100-04 Ch. 12 § 30.6.6 / OIG Work Plan / AMA CPT Guidelines",
+  "target_codes": ["99213-25", "99214-25", "20610", "11102", "17000"],
+  "summary": "Audits claims where an Evaluation and Management (E/M) service is billed with Modifier 25 on the same date of service as a minor procedure (0 or 10-day global period). Requires documentation of a distinct, significant clinical problem beyond usual pre/post-procedure work.",
+  "statutory_appeal_timeline_days": 60,
+  "expedited_appeal_timeline_hours": 72,
+  "criteria": [
+    {
+      "criterion_id": "CRIT-MOD25-DISTINCT-PROBLEM",
+      "name": "Documentation of Significant, Separately Identifiable Medical Problem",
+      "description": "Progress note must clearly substantiate evaluation/management of a clinical condition unrelated to or distinctly above and beyond the decision to perform the minor procedure.",
+      "criterion_type": "INCLUSION",
+      "field_name": "distinct_problem_documented",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "CMS Pub 100-04 Ch 12 § 30.6.6; CPT Coding Instructions",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-MOD25-COGNITIVE-MDM",
+      "name": "Independent Medical Decision Making (MDM) or Time Substantiated",
+      "description": "The separate problem's history, exam, and cognitive medical decision making meets the code level (e.g. Moderate Complexity for 99214) independent of procedure time and consent.",
+      "criterion_type": "INCLUSION",
+      "field_name": "independent_mdm_level",
+      "rule_operator": "in",
+      "threshold": ["MODERATE", "HIGH"],
+      "statutory_reference": "2021/2023 AMA E/M Documentation Guidelines",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-MOD25-UNBUNDLED-OVERLAP",
+      "name": "Exclusion: E/M Content Merely Duplicates Inherent Procedural Work",
+      "description": "Disallow if the E/M documentation solely consists of procedure consent, site inspection, pre-procedure timeout, and post-procedure dressing/care instructions.",
+      "criterion_type": "EXCLUSION",
+      "field_name": "is_merely_procedural_work",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "OIG Report OEI-07-03-00470; National Correct Coding Initiative (NCCI)",
+      "is_mandatory": true
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "GRP-MOD25-INTEGRITY",
+      "title": "Modifier 25 Medical Necessity & Unbundling Prevention",
+      "operator": "ALL_OF",
+      "criteria_ids": [
+        "CRIT-MOD25-DISTINCT-PROBLEM",
+        "CRIT-MOD25-COGNITIVE-MDM",
+        "CRIT-MOD25-UNBUNDLED-OVERLAP"
+      ]
+    }
+  ]
+}

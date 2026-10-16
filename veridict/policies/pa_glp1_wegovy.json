@@ -1,0 +1,114 @@
+{
+  "policy_id": "POL-PA-GLP1-2026",
+  "title": "Prior Authorization Clinical Policy: Glucagon-Like Peptide-1 (GLP-1) Receptor Agonists for Chronic Weight Management",
+  "version": "2026.2",
+  "effective_date": "2026-01-01",
+  "domain": "PRIOR_AUTHORIZATION",
+  "regulatory_framework": "CMS-0057-F / ERISA 29 CFR 2560.503-1 / FDA Wegovy Prescribing Information",
+  "target_codes": ["J3490", "J3590", "E66.01", "E66.9", "Z68.30-Z68.45"],
+  "summary": "Mandates criteria-grounded coverage review for semaglutide (Wegovy) 2.4 mg subcutaneous weekly. Requires confirmed BMI thresholds, lifestyle intervention trial, documentation recency, and absence of boxed-warning contraindications.",
+  "statutory_appeal_timeline_days": 30,
+  "expedited_appeal_timeline_hours": 72,
+  "criteria": [
+    {
+      "criterion_id": "CRIT-GLP1-BMI-HIGH",
+      "name": "Body Mass Index >= 30 kg/m2 (Obese)",
+      "description": "Patient must have documented baseline Body Mass Index (BMI) greater than or equal to 30.0 kg/m2.",
+      "criterion_type": "INCLUSION",
+      "field_name": "bmi",
+      "rule_operator": ">=",
+      "threshold": 30.0,
+      "unit": "kg/m2",
+      "lookback_days": 90,
+      "statutory_reference": "FDA Wegovy Prescribing Information Section 1; CMS-0057-F",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-GLP1-BMI-OVERWEIGHT",
+      "name": "Body Mass Index >= 27 kg/m2 with Comorbidity",
+      "description": "Patient has BMI >= 27.0 kg/m2 AND at least one documented weight-related comorbidity (hypertension, T2DM, dyslipidemia, obstructive sleep apnea).",
+      "criterion_type": "INCLUSION",
+      "field_name": "bmi",
+      "rule_operator": ">=",
+      "threshold": 27.0,
+      "unit": "kg/m2",
+      "lookback_days": 90,
+      "statutory_reference": "FDA Wegovy Prescribing Information Section 1",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-GLP1-COMORBIDITY",
+      "name": "Documented Weight-Related Comorbidity",
+      "description": "Presence of hypertension, type 2 diabetes, dyslipidemia, or OSA.",
+      "criterion_type": "INCLUSION",
+      "field_name": "has_weight_comorbidity",
+      "rule_operator": "==",
+      "threshold": true,
+      "lookback_days": 365,
+      "statutory_reference": "AACE/ACE Clinical Practice Guidelines for Obesity",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-GLP1-LIFESTYLE-TRIAL",
+      "name": "Trial of Structured Lifestyle Intervention >= 6 Months",
+      "description": "Documented participation in a comprehensive lifestyle intervention (reduced-calorie diet and increased physical activity) for at least 6 consecutive months prior to medication request.",
+      "criterion_type": "STEP_THERAPY",
+      "field_name": "lifestyle_trial_months",
+      "rule_operator": ">=",
+      "threshold": 6,
+      "unit": "months",
+      "lookback_days": 365,
+      "statutory_reference": "National Coverage Determination (NCD) & Plan UM Manual § 4.2",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-GLP1-RECENCY",
+      "name": "Weight and Vitals Recency (<= 90 Days)",
+      "description": "Baseline weight and height/BMI measured in clinical office visit within 90 days preceding authorization request.",
+      "criterion_type": "DOCUMENTATION",
+      "field_name": "vitals_recency_days",
+      "rule_operator": "<=",
+      "threshold": 90,
+      "unit": "days",
+      "lookback_days": 90,
+      "statutory_reference": "NCQA UM 4 / CMS Quality Guidelines",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-GLP1-NO-MTC",
+      "name": "Exclusion: Personal or Family History of Medullary Thyroid Carcinoma",
+      "description": "Contraindicated in patients with a personal or family history of Medullary Thyroid Carcinoma (MTC) or Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).",
+      "criterion_type": "EXCLUSION",
+      "field_name": "has_mtc_or_men2_history",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "FDA Black Box Warning (Semaglutide package insert Section 4)",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-GLP1-NO-PREGNANCY",
+      "name": "Exclusion: Current Pregnancy or Lactation",
+      "description": "Contraindicated during pregnancy; potential for fetal harm.",
+      "criterion_type": "EXCLUSION",
+      "field_name": "is_pregnant_or_lactating",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "FDA Wegovy Prescribing Information Section 8.1",
+      "is_mandatory": true
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "GRP-BMI-REQUIREMENT",
+      "title": "BMI Eligibility (Obese OR Overweight with Comorbidity)",
+      "operator": "ANY_OF",
+      "criteria_ids": ["CRIT-GLP1-BMI-HIGH", "CRIT-GLP1-BMI-OVERWEIGHT"]
+    },
+    {
+      "group_id": "GRP-SAFETY-EXCLUSIONS",
+      "title": "Safety Boxed Warning Exclusions",
+      "operator": "ALL_OF",
+      "criteria_ids": ["CRIT-GLP1-NO-MTC", "CRIT-GLP1-NO-PREGNANCY"]
+    }
+  ]
+}

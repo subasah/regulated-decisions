@@ -1,0 +1,71 @@
+{
+  "policy_id": "POL-CARE-HF-TOC-2026",
+  "title": "Care Management Clinical Policy: Complex Case Stratification and Transition-of-Care (TOC) Enrollment for Heart Failure",
+  "version": "2026.1",
+  "effective_date": "2026-01-01",
+  "domain": "CARE_MANAGEMENT",
+  "regulatory_framework": "CMS Hospital Readmissions Reduction Program (HRRP) / NCQA Complex Case Management Standards (CM 1-4)",
+  "target_codes": ["99495", "99496", "I50.22", "I50.9", "G0162"],
+  "summary": "Governs automated stratification and care plan authorization for high-risk Heart Failure patients transitioning from hospital to home. Triggers intensive RN care management, 48-hour post-discharge outreach, and cellular remote biometric monitoring.",
+  "statutory_appeal_timeline_days": 14,
+  "expedited_appeal_timeline_hours": 24,
+  "criteria": [
+    {
+      "criterion_id": "CRIT-HF-HIGH-READMISSION-RISK",
+      "name": "Elevated 30-Day Readmission Risk (LACE Index >= 10 OR >= 2 Inpatient Admissions in 12 Months)",
+      "description": "Patient exhibits documented high readmission vulnerability based on validated LACE score >= 10 or multi-admission history.",
+      "criterion_type": "INCLUSION",
+      "field_name": "lace_index",
+      "rule_operator": ">=",
+      "threshold": 10,
+      "statutory_reference": "NCQA CM 1: Identification and Assessment; CMS HRRP",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-HF-SYSTOLIC-DYSFUNCTION",
+      "name": "Reduced Left Ventricular Ejection Fraction (LVEF <= 40%) or NYHA Class III/IV",
+      "description": "Documented echocardiogram showing reduced LVEF <= 40% or advanced clinical symptomatic functional limitation.",
+      "criterion_type": "INCLUSION",
+      "field_name": "lvef_percentage",
+      "rule_operator": "<=",
+      "threshold": 40,
+      "unit": "%",
+      "lookback_days": 365,
+      "statutory_reference": "AHA/ACC/HFSA 2022 Guideline for the Management of Heart Failure",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-HF-SDOH-BARRIER",
+      "name": "Identified Social Determinant of Health (SDOH) Vulnerability",
+      "description": "Documentation of transportation barriers, food insecurity, cognitive impairment, or medication unaffordability.",
+      "criterion_type": "INCLUSION",
+      "field_name": "has_sdoh_barrier",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "Healthy People 2030 / CMS Framework for Health Equity",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-HF-ACTIVE-HOSPICE",
+      "name": "Exclusion: Active Hospice or Palliative-Only Comfort Care Election",
+      "description": "Exclude standard TOC pathway if patient has elected palliative/hospice comfort measures only; route to specialized palliative care protocol.",
+      "criterion_type": "EXCLUSION",
+      "field_name": "is_enrolled_in_hospice",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "CMS Hospice Manual Regulations § 40.1",
+      "is_mandatory": true
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "GRP-HF-CLINICAL-NEED",
+      "title": "Clinical High-Risk Indicators",
+      "operator": "ANY_OF",
+      "criteria_ids": [
+        "CRIT-HF-HIGH-READMISSION-RISK",
+        "CRIT-HF-SYSTOLIC-DYSFUNCTION"
+      ]
+    }
+  ]
+}

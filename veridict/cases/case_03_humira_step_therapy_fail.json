@@ -1,0 +1,50 @@
+{
+  "case_id": "CASE-HUMIRA-003",
+  "title": "Humira Prior Auth: David Chen - Step Therapy Incompletion (Methotrexate Duration)",
+  "domain": "PRIOR_AUTHORIZATION",
+  "policy_id": "POL-PA-HUMIRA-RA-2026",
+  "demographics": {
+    "patient_id": "PT-44109",
+    "name": "David Chen",
+    "age": 38,
+    "gender": "M",
+    "member_id": "MEM-11983-C",
+    "coverage_plan": "Commercial Employer Health Benefit Plan"
+  },
+  "requested_service": "Humira (adalimumab) pen injector, 40 mg/0.4 mL subcutaneous every 14 days",
+  "service_codes": ["J0135", "M05.79"],
+  "requesting_provider": "Dr. Amanda Ross, MD (Rheumatology)",
+  "unstructured_note": "RHEUMATOLOGY OUTPATIENT CONSULT NOTE\nEncounter Date: October 10, 2026\nPatient: David Chen (DOB: 11/14/1987, Age: 38, Male)\nProvider: Dr. Amanda Ross, MD\n\nDIAGNOSIS & CLINICAL ASSESSMENT:\nPatient is a 38-year-old male with seropositive rheumatoid arthritis (anti-CCP > 250 U/mL, RF 84 IU/mL). Today's joint exam demonstrates 6 swollen and 8 tender joints (bilateral MCPs and PIPs, right wrist), with CDAI score of 26.5 indicating Moderate-to-Severe disease activity. Elevated CRP 18.4 mg/L.\n\nSTEP THERAPY & MEDICATION HISTORY:\nPatient was initiated on oral Methotrexate 10 mg weekly by his PCP on August 15, 2026. He took this medication for approximately 4 weeks, discontinuing on September 12, 2026 due to transient mild nausea on dosage mornings. No trial of subcutaneous formulation, concurrent antiemetic, folic acid dosage adjustment, or trial of alternative csDMARDs (e.g., Leflunomide or Sulfasalazine) was attempted. The patient explicitly requested a biologic after seeing television advertising.\n\nINFECTION & SAFETY SCREENING:\n- QuantiFERON-TB Gold: Negative (resulted August 20, 2026).\n- Hepatitis B surface antigen & Hepatitis C antibody: Non-reactive.\n- No signs or symptoms of active infection, fever, or chills.\n\nPLAN & PRIOR AUTHORIZATION REQUEST:\nRequesting Humira (adalimumab) 40mg SC every other week for moderate-to-severe RA. Clinical guidelines recommend rapid disease control. While conventional csDMARD trial was only 4 weeks, provider notes patient reluctance to resume oral methotrexate.",
+  "structured_data": {
+    "ra_disease_activity": "MODERATE",
+    "dmard_trial_weeks": 4,
+    "tb_screening_negative": true,
+    "has_active_infection": false
+  },
+  "documents": [
+    {
+      "snippet_id": "SNIP-03-DISEASE-SEVERITY",
+      "text": "CDAI score of 26.5 indicating Moderate-to-Severe disease activity. Elevated CRP 18.4 mg/L.",
+      "section": "DIAGNOSIS & CLINICAL ASSESSMENT",
+      "date": "2026-10-10",
+      "start_char": 420,
+      "end_char": 510
+    },
+    {
+      "snippet_id": "SNIP-03-MTX-TRIAL",
+      "text": "He took this medication for approximately 4 weeks, discontinuing on September 12, 2026 due to transient mild nausea",
+      "section": "STEP THERAPY & MEDICATION HISTORY",
+      "date": "2026-10-10",
+      "start_char": 690,
+      "end_char": 806
+    },
+    {
+      "snippet_id": "SNIP-03-TB",
+      "text": "QuantiFERON-TB Gold: Negative (resulted August 20, 2026).",
+      "section": "INFECTION & SAFETY SCREENING",
+      "date": "2026-10-10",
+      "start_char": 1040,
+      "end_char": 1098
+    }
+  ]
+}

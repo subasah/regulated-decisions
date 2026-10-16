@@ -1,0 +1,51 @@
+{
+  "case_id": "CASE-CARE-006",
+  "title": "Care Management Stratification: Beatrice Gomez - High-Risk Heart Failure Post-Discharge TOC Protocol",
+  "domain": "CARE_MANAGEMENT",
+  "policy_id": "POL-CARE-HF-TOC-2026",
+  "demographics": {
+    "patient_id": "PT-61029",
+    "name": "Beatrice Gomez",
+    "age": 73,
+    "gender": "F",
+    "member_id": "MEM-33418-B",
+    "coverage_plan": "Dual Eligible Medicare-Medicaid Plan (D-SNP)"
+  },
+  "requested_service": "Transition of Care (TOC) Complex Case Management Protocol & Remote Biometric Patient Monitoring",
+  "service_codes": ["99495", "99496", "I50.22", "G0162"],
+  "requesting_provider": "Sarah Lin, RN, BSN (Inpatient Discharge Care Coordinator)",
+  "unstructured_note": "HOSPITAL DISCHARGE SUMMARY & CARE MANAGEMENT REFERRAL\nDischarge Date: October 14, 2026\nPatient: Beatrice Gomez (DOB: 07/04/1953, Age: 73, Female)\nDischarging Hospitalist: Dr. Raymond Cole, MD\nReferral Coordinator: Sarah Lin, RN\n\nADMISSION DIAGNOSIS & CLINICAL SUMMARY:\n73-year-old female admitted on Oct 10 with acute decompensated heart failure with reduced ejection fraction (HFrEF) and volume overload. Transthoracic echocardiogram confirmed severe left ventricular systolic dysfunction with LVEF calculated at 32%. Patient underwent intravenous diuresis with furosemide, achieving 4.8 kg net fluid loss and resolution of orthopnea. Transitioned to oral Bumex 2mg daily, Entresto 49/51mg BID, and Metoprolol Succinate 50mg daily.\n\nREADMISSION RISK STRATIFICATION (LACE INDEX):\n- Length of stay: 4 days (score = 4)\n- Acuity of admission: Emergency (score = 3)\n- Comorbidity score (Charlson index: HF, DM, CKD 3 = score = 3)\n- Emergency department visits in past 6 months: 2 prior visits (score = 2)\nTOTAL LACE INDEX = 12 (High risk for 30-day readmission, cutoff >= 10).\n\nSOCIAL DETERMINANTS OF HEALTH (SDOH) SCREENING:\nSocial work evaluation completed Oct 13: Patient lives alone in a second-floor apartment without elevator. She lacks personal transportation and relies on a neighbor for grocery access. She expressed severe worry regarding co-pays for newly prescribed Entresto ($110/month gap). Denies hospice or comfort care; desires active rehabilitation and home independence.\n\nCARE PLAN RECOMMENDATION:\n1. Intensive Nurse Case Management (TOC Protocol 99495/99496).\n2. Mandate clinical outreach telephone call within 48 business hours of discharge.\n3. Supply cellular-connected home scale and automatic blood pressure cuff for daily remote biometric monitoring.\n4. Social work pharmacy assistance application for co-pay assistance foundation subsidy.",
+  "structured_data": {
+    "lace_index": 12,
+    "lvef_percentage": 32,
+    "has_sdoh_barrier": true,
+    "is_enrolled_in_hospice": false,
+    "recent_admissions_count": 2
+  },
+  "documents": [
+    {
+      "snippet_id": "SNIP-06-LACE",
+      "text": "TOTAL LACE INDEX = 12 (High risk for 30-day readmission, cutoff >= 10).",
+      "section": "READMISSION RISK STRATIFICATION",
+      "date": "2026-10-14",
+      "start_char": 940,
+      "end_char": 1010
+    },
+    {
+      "snippet_id": "SNIP-06-LVEF",
+      "text": "Transthoracic echocardiogram confirmed severe left ventricular systolic dysfunction with LVEF calculated at 32%.",
+      "section": "ADMISSION DIAGNOSIS & CLINICAL SUMMARY",
+      "date": "2026-10-14",
+      "start_char": 480,
+      "end_char": 593
+    },
+    {
+      "snippet_id": "SNIP-06-SDOH",
+      "text": "Patient lives alone in a second-floor apartment without elevator. She lacks personal transportation and relies on a neighbor for grocery access.",
+      "section": "SOCIAL DETERMINANTS OF HEALTH (SDOH) SCREENING",
+      "date": "2026-10-14",
+      "start_char": 1130,
+      "end_char": 1276
+    }
+  ]
+}

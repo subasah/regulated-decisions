@@ -1,0 +1,76 @@
+{
+  "policy_id": "POL-PA-HUMIRA-RA-2026",
+  "title": "Prior Authorization Clinical Policy: Adalimumab (Humira) for Moderate to Severe Rheumatoid Arthritis",
+  "version": "2026.1",
+  "effective_date": "2026-01-01",
+  "domain": "PRIOR_AUTHORIZATION",
+  "regulatory_framework": "CMS-0057-F / American College of Rheumatology (ACR) Guidelines / ERISA 503",
+  "target_codes": ["J0135", "M05.79", "M06.0", "M06.9"],
+  "summary": "Governs biologic therapy authorization for Rheumatoid Arthritis. Mandates diagnostic confirmation of moderate-to-severe disease, documentation of conventional synthetic DMARD step-therapy trial, and active infection/TB screening.",
+  "statutory_appeal_timeline_days": 30,
+  "expedited_appeal_timeline_hours": 72,
+  "criteria": [
+    {
+      "criterion_id": "CRIT-RA-DIAGNOSIS",
+      "name": "Diagnosis of Moderate-to-Severe Active Rheumatoid Arthritis",
+      "description": "Established diagnosis of active moderate-to-severe RA evidenced by persistent synovitis in >= 3 joints, elevated ESR/CRP, or positive RF/anti-CCP.",
+      "criterion_type": "INCLUSION",
+      "field_name": "ra_disease_activity",
+      "rule_operator": "in",
+      "threshold": ["MODERATE", "SEVERE"],
+      "lookback_days": 180,
+      "statutory_reference": "ACR 2021 Guideline for the Treatment of Rheumatoid Arthritis",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-RA-STEP-DMARD",
+      "name": "Step Therapy: Trial and Inadequate Response/Intolerance to Methotrexate or csDMARD",
+      "description": "Documented trial of oral or subcutaneous Methotrexate (>= 15mg/week for at least 12 weeks), or documented contraindication/intolerance, or trial of alternative csDMARD (Leflunomide, Sulfasalazine).",
+      "criterion_type": "STEP_THERAPY",
+      "field_name": "dmard_trial_weeks",
+      "rule_operator": ">=",
+      "threshold": 12,
+      "unit": "weeks",
+      "lookback_days": 730,
+      "statutory_reference": "ACR Step Therapy Protocol; State Step-Therapy Reform Acts",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-RA-TB-SCREENING",
+      "name": "Documentation: Negative Latent Tuberculosis (TB) Screen within 12 Months",
+      "description": "Negative QuantiFERON-TB Gold, T-SPOT, or tuberculin skin test (PPD) within past 12 months, or completion of appropriate prophylactic regimen.",
+      "criterion_type": "DOCUMENTATION",
+      "field_name": "tb_screening_negative",
+      "rule_operator": "==",
+      "threshold": true,
+      "lookback_days": 365,
+      "statutory_reference": "CDC / ACR Biologic Safety Screening Guidelines",
+      "is_mandatory": true
+    },
+    {
+      "criterion_id": "CRIT-RA-NO-ACTIVE-INFECTION",
+      "name": "Exclusion: Active Serious or Opportunistic Infection",
+      "description": "Therapy contraindicated in patients with active systemic infection, sepsis, or untreated viral hepatitis B/C.",
+      "criterion_type": "EXCLUSION",
+      "field_name": "has_active_infection",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "FDA Black Box Warning (Serious Infections)",
+      "is_mandatory": true
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "GRP-RA-PREREQUISITES",
+      "title": "Diagnosis and Step Therapy",
+      "operator": "ALL_OF",
+      "criteria_ids": ["CRIT-RA-DIAGNOSIS", "CRIT-RA-STEP-DMARD"]
+    },
+    {
+      "group_id": "GRP-RA-SAFETY",
+      "title": "Biologic Safety and Screenings",
+      "operator": "ALL_OF",
+      "criteria_ids": ["CRIT-RA-TB-SCREENING", "CRIT-RA-NO-ACTIVE-INFECTION"]
+    }
+  ]
+}

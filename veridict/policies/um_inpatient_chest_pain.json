@@ -1,0 +1,70 @@
+{
+  "policy_id": "POL-UM-CHESTPAIN-2026",
+  "title": "Utilization Management Clinical Policy: Level of Care Adjudication for Acute Chest Pain / Rule-Out ACS",
+  "version": "2026.3",
+  "effective_date": "2026-01-01",
+  "domain": "UTILIZATION_MANAGEMENT",
+  "regulatory_framework": "CMS Two-Midnight Rule (CMS-1599-F; 42 CFR § 412.3) / MCG Care Guidelines / InterQual",
+  "target_codes": ["99221", "99222", "99223", "99218", "99219", "99220", "R07.9", "I20.9"],
+  "summary": "Establishes clinical criteria determining whether acute chest pain qualifies for Part A Acute Inpatient Admission versus Part B Observation Stay. Inpatient admission requires acute high-risk features or unexpected clinical deterioration spanning 2 midnights.",
+  "statutory_appeal_timeline_days": 30,
+  "expedited_appeal_timeline_hours": 48,
+  "criteria": [
+    {
+      "criterion_id": "CRIT-UM-HEMODYNAMIC-INSTABILITY",
+      "name": "Hemodynamic Instability or Cardiogenic Shock",
+      "description": "Sustained SBP < 90 mmHg, requiring vasopressors, acute pulmonary edema, or life-threatening ventricular arrhythmia.",
+      "criterion_type": "INCLUSION",
+      "field_name": "has_hemodynamic_instability",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "AHA/ACC 2021 Chest Pain Guideline Section 4; CMS Two-Midnight Exception",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-UM-TROPONIN-ELEVATION",
+      "name": "Positive Serial Cardiac Biomarkers (Acute Myocardial Infarction)",
+      "description": "Documented rising and/or falling cardiac troponin above the 99th percentile upper reference limit (URL) consistent with acute myocardial necrosis.",
+      "criterion_type": "INCLUSION",
+      "field_name": "troponin_above_url",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "Fourth Universal Definition of Myocardial Infarction; MCG Inpatient Indicators",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-UM-ECG-ISCHEMIA",
+      "name": "New Ischemic ECG Changes (ST Elevation or Persistent ST Depression)",
+      "description": "New ST-segment elevation >= 1mm in two contiguous leads, dynamic ST depressions >= 1mm, or new pathological Q waves.",
+      "criterion_type": "INCLUSION",
+      "field_name": "has_ischemic_ecg",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "AHA/ACC STEMI/NSTEMI Criteria",
+      "is_mandatory": false
+    },
+    {
+      "criterion_id": "CRIT-UM-TWO-MIDNIGHT-EXPECTATION",
+      "name": "Physician Expectation of Two or More Midnights of Hospital Care",
+      "description": "Admitting physician must explicitly document medical necessity rationale why patient requires acute hospital-level interventions expected to span across at least two midnights.",
+      "criterion_type": "DOCUMENTATION",
+      "field_name": "two_midnight_expectation_documented",
+      "rule_operator": "==",
+      "threshold": true,
+      "statutory_reference": "CMS-1599-F; 42 CFR § 412.3(d)",
+      "is_mandatory": true
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "GRP-ACUTE-INPATIENT-SEVERITY",
+      "title": "Acute High-Risk Objective Clinical Severity (Must satisfy at least 1 for Inpatient)",
+      "operator": "ANY_OF",
+      "criteria_ids": [
+        "CRIT-UM-HEMODYNAMIC-INSTABILITY",
+        "CRIT-UM-TROPONIN-ELEVATION",
+        "CRIT-UM-ECG-ISCHEMIA"
+      ]
+    }
+  ]
+}
